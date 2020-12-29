@@ -1,19 +1,127 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="static/css/index.css">
-</head>
-<body>
-    <header>
-        <div class="container">
-            <img src="static/images/logo.png">
-        </div>
-    </header>
-    <main></main>
-    <footer></footer>
-    <img src="static/images/banner.gif">
-    <script type="text/javascript" src="static/js/index.js"></script>
-</body>
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <title>测试</title>
+        <!-- <link rel="stylesheet" href="/static/css/bootstrap.min.css"> -->
+        <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/static/css/neo4jd3.min.css?v=0.0.1">
+        <style>
+            body,
+            html,
+            .neo4jd3 {
+                height: 100%;
+                overflow: hidden;
+            }
+            .neo4jd3 {
+                border: 1px solid #000;
+                padding-left: 300px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="neo4jd3" style="height: 600px;"></div>
+        <!-- <a href="https://github.com/eisman/neo4jd3"><img style="cursor: pointer; position: absolute; top: 0; right: 0; border: 0;" src="/static/img/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" data-canonical-src="/static/img/forkme_right_gray_6d6d6d.png"></a> -->
+
+        <!-- Scripts -->
+        <script src="/static/js/d3.min.js"></script>
+        <script src="/static/js/data.js"></script>
+        <script src="/static/js/neo4jd3.js?v=0.0.1"></script>
+        <script type="text/javascript">
+            console.log(JSON.stringify(neo4jData))
+            function init() {
+                var neo4jd3 = new Neo4jd3('#neo4jd3',
+                    {
+                    highlight: [
+                        {
+                            class: 'Project',
+                            property: 'name',
+                            value: 'neo4jd3'
+                        }, {
+                            class: 'User',
+                            property: 'userId',
+                            value: 'eisman'
+                        }
+                    ],
+                    icons: {
+                        'Address': 'home',
+                        'Api': 'gear',
+                        'BirthDate': 'birthday-cake',
+                        'Cookie': 'paw',
+                        'CreditCard': 'credit-card',
+                        'Device': 'laptop',
+                        'Email': 'at',
+                        'Git': 'git',
+                        'Github': 'github',
+                        'Google': 'google',
+                        'icons': 'font-awesome',
+                        'Ip': 'map-marker',
+                        'Issues': 'exclamation-circle',
+                        'Language': 'language',
+                        'Options': 'sliders',
+                        'Password': 'lock',
+                        'Phone': 'phone',
+                        'Project': 'folder-open',
+                        'SecurityChallengeAnswer': 'commenting',
+                        'User': 'user',
+                        'zoomFit': 'arrows-alt',
+                        'zoomIn': 'search-plus',
+                        'zoomOut': 'search-minus'
+                    },
+                    images: {
+                        'Address': '/static/img/twemoji/1f3e0.svg',
+                        'Api': '/static/img/twemoji/1f527.svg',
+                        'BirthDate': '/static/img/twemoji/1f382.svg',
+                        'Cookie': '/static/img/twemoji/1f36a.svg',
+                        'CreditCard': '/static/img/twemoji/1f4b3.svg',
+                        'Device': '/static/img/twemoji/1f4bb.svg',
+                        'Email': '/static/img/twemoji/2709.svg',
+                        'Git': '/static/img/twemoji/1f5c3.svg',
+                        'Github': '/static/img/twemoji/1f5c4.svg',
+                        'icons': '/static/img/twemoji/1f38f.svg',
+                        'Ip': '/static/img/twemoji/1f4cd.svg',
+                        'Issues': '/static/img/twemoji/1f4a9.svg',
+                        'Language': '/static/img/twemoji/1f1f1-1f1f7.svg',
+                        'Options': '/static/img/twemoji/2699.svg',
+                        'Password': '/static/img/twemoji/1f511.svg',
+                        'Phone': '/static/img/twemoji/1f4de.svg',
+                        'Project': '/static/img/twemoji/2198.svg',
+                        'Project|name|neo4jd3': '/static/img/twemoji/2196.svg',
+                        'SecurityChallengeAnswer': '/static/img/twemoji/1f4ac.svg',
+                        'User': '/static/img/twemoji/1f600.svg',
+                        'zoomFit': '/static/img/twemoji/2194.svg',
+                        'zoomIn': '/static/img/twemoji/1f50d.svg',
+                        'zoomOut': '/static/img/twemoji/1f50e.svg'
+                    },
+                    minCollision: 60,
+                    neo4jData: neo4jData,
+                    // neo4jDataUrl: 'json/neo4jData.json',
+                    nodeRadius: 25,
+                    onNodeDoubleClick: function(node) {
+                        // console.log(node, 'onNodeDoubleClick',JSON.stringify(node))
+                        var maxNodes = 5;
+                        // console.log(node.x ,JSON.stringify(node), 11111)
+                        // node.x = node.x - 300
+                        // console.log(node.x ,JSON.stringify(node))
+                        var data = neo4jd3.randomD3Data(node, maxNodes);
+                        console.log(JSON.stringify(node),'\n\n\n', JSON.stringify(data),'\n\n\n', data.nodes.length)
+                        neo4jd3.updateWithD3Data(data);
+                    },
+                    onRelationshipDoubleClick: function(relationship) {
+                        console.log('double click on relationship: ' + JSON.stringify(relationship));
+                    },
+                    zoomFit: true
+                });
+            }
+
+            window.onload = init;
+        </script>
+
+        <script>
+
+        </script>
+    </body>
 </html>

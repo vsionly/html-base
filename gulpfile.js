@@ -36,5 +36,7 @@ gulp.task('watch', function () {
     gulp.watch(['src/images/*'], ['image']);
 });
 
-gulp.task('default', ['connect','watch']);
-
+// gulp.task('default', ['connect','watch']);
+gulp.task('default', gulp.series('connect', 'watch', function() {
+  // Do something
+}));
