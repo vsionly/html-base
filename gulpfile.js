@@ -6,7 +6,8 @@ connect = require('gulp-connect');
 
 gulp.task('connect', function() {
     plugins.connect.server({
-        port: 8321,
+        port: 80,
+        host: '0.0.0.0',
         livereload: true
     });
 });
